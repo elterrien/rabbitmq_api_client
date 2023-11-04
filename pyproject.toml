@@ -1,0 +1,76 @@
+[project]
+name = "rabbitmq_api_client"
+version = "0.0.1"
+description = "Http client to manage Rabbitmq admin"
+authors = [
+    {name = "Elie Terrien", email = "contact@elie-terrien.fr"},
+]
+dependencies = [
+    "httpx>=0.25.0",
+    "pydantic>=2.4.2",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm.dev-dependencies]
+lint = [
+    "ruff>=0.1.4",
+]
+
+[tool.pdm.scripts]
+check = "ruff check . --fix & ruff format ."
+test = "python -m unittest discover -s src"
+
+[tool.ruff.lint]
+select = [
+  # pycodestyle
+  "E",
+  # Pyflakes
+  "F",
+  # pyupgrade
+  "UP",
+  # flake8-bugbear
+  "B",
+  # flake8-simplify
+  "SIM",
+  # isort
+  "I",
+]
+ignore = [
+    "E501"
+]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "tab"
