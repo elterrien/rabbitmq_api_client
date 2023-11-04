@@ -24,7 +24,7 @@ lint = [
 
 [tool.pdm.scripts]
 check = "ruff check . --fix & ruff format ."
-test = "python -m unittest discover -s src"
+test = "python -m unittest discover"
 
 [tool.ruff.lint]
 select = [
