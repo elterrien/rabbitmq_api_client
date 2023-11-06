@@ -94,6 +94,18 @@ class RabbitMQClient(BaseClient):
 		vhost = urllib.parse.quote(vhost, safe='')
 		return self.put(f'/api/queues/{vhost}/{name}', queue_dict)
 
+	def get_vhost_queue(self, vhost: str, name: str) -> dict:
+		"""
+		Get a queue on a specific vhost on the RabbitMQ server.
+
+		:param vhost: name of vhost
+		:param name: name of queue
+		:return: dict of queue
+		"""
+		name = urllib.parse.quote(name, safe='')
+		vhost = urllib.parse.quote(vhost, safe='')
+		return self.get(f'/api/queues/{vhost}/{name}')
+
 	def get_users(self) -> list:
 		"""Get all users on the RabbitMQ server.
 
@@ -129,3 +141,27 @@ class RabbitMQClient(BaseClient):
 
 	def get_user_permissions(self, name: str) -> dict:
 		return self.get(f'/api/users/{name}/permissions')
+
+	def get_user_topic_permissions(self, name: str) -> dict:
+		return self.get(f'/api/users/{name}/topic-permissions')
+
+	def get_users_without_permissions(self) -> list:
+		return self.get('/api/users-without-permissions')
+
+	def get_permissions(self) -> list:
+		return self.get('/api/permissions')
+
+	def get_user_permissions_on_vhost(self, name: str, vhost: str) -> dict:
+		name = urllib.parse.quote(name, safe='')
+		vhost = urllib.parse.quote(vhost, safe='')
+		return self.get(f'/api/permissions/{vhost}/{name}')
+
+	def create_user_permissions_on_vhost(self, name: str, vhost: str, permissions: dict) -> dict:
+		name = urllib.parse.quote(name, safe='')
+		vhost = urllib.parse.quote(vhost, safe='')
+		return self.put(f'/api/permissions/{vhost}/{name}', permissions)
+
+	def delete_user_permissions_on_vhost(self, name: str, vhost: str) -> dict:
+		name = urllib.parse.quote(name, safe='')
+		vhost = urllib.parse.quote(vhost, safe='')
+		return self.delete(f'/api/permissions/{vhost}/{name}')

@@ -1,4 +1,4 @@
-# Http client to manage Rabbitmq admin api
+# Python library to interact with the RabbitMQ Admin API.
 
 ## Description
 
