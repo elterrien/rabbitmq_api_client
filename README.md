@@ -2,7 +2,9 @@
 
 ## Description
 
-This package provides a simple http client to manage Rabbitmq admin api based on [httpx](https://www.python-httpx.org/).
+This package provides a simple http client to manage Rabbitmq admin api.
+
+The package is based on [httpx](https://www.python-httpx.org/).
 
 It also provides [pydantic](https://docs.pydantic.dev/latest/) models for request.
 

@@ -13,8 +13,8 @@ requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}
 
-[project.url]
-Source = 'https://gitlab.com/rutilus_data/rabbitmq_api_client'
+[project.urls]
+Source = 'https://github.com/elterrien/rabbitmq_api_client'
 
 [build-system]
 requires = ["pdm-backend"]
@@ -28,7 +28,7 @@ lint = [
 [tool.pdm.scripts]
 check = "ruff check . --fix & ruff format ."
 test = "python -m unittest discover"
-upload = "twine upload dist/*"
+upload = "pdm build & twine upload dist/*"
 
 [tool.ruff.lint]
 select = [
