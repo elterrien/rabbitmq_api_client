@@ -1,7 +1,7 @@
 import urllib.parse
 
 from rabbitmq_api_client.base import BaseClient
-from rabbitmq_api_client.schemas import CreateQueue, CreateUser, CreateVhost
+from rabbitmq_api_client.schemas import CreateQueue, CreateUser, CreateVhost, Permissions
 
 
 class RabbitMQClient(BaseClient):
@@ -156,10 +156,10 @@ class RabbitMQClient(BaseClient):
 		vhost = urllib.parse.quote(vhost, safe='')
 		return self.get(f'/api/permissions/{vhost}/{name}')
 
-	def create_user_permissions_on_vhost(self, name: str, vhost: str, permissions: dict) -> dict:
+	def create_user_permissions_on_vhost(self, name: str, vhost: str, permissions: Permissions) -> dict:
 		name = urllib.parse.quote(name, safe='')
 		vhost = urllib.parse.quote(vhost, safe='')
-		return self.put(f'/api/permissions/{vhost}/{name}', permissions)
+		return self.put(f'/api/permissions/{vhost}/{name}', permissions.model_dump())
 
 	def delete_user_permissions_on_vhost(self, name: str, vhost: str) -> dict:
 		name = urllib.parse.quote(name, safe='')
