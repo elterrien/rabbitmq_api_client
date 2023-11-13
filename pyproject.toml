@@ -1,6 +1,6 @@
 [project]
 name = "rabbitmq_api_client"
-version = "0.0.2"
+version = "0.0.4"
 description = "Http client to manage Rabbitmq admin"
 authors = [
     {name = "Elie Terrien", email = "contact@elie-terrien.fr"},

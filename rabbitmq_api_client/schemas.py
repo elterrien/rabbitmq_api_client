@@ -48,3 +48,11 @@ class Permissions(BaseModel):
     configure: str = Field('^$', description="Configure permission")
     write: str = Field('^$', description="Write permission")
     read: str = Field('^$', description="Read permission")
+
+
+class Exchange(BaseModel):
+    type: str = 'direct'
+    durable: bool = True
+    auto_delete: bool = False
+    internal: bool = False
+    arguments: dict = {}
