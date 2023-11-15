@@ -1,7 +1,7 @@
 import urllib.parse
 
 from rabbitmq_api_client.base import BaseClient
-from rabbitmq_api_client.schemas import CreateQueue, CreateUser, CreateVhost, Permissions, Exchange
+from rabbitmq_api_client.schemas import CreateQueue, CreateUser, CreateVhost, Permissions, Exchange, Binding
 
 
 class RabbitMQClient(BaseClient):
@@ -218,3 +218,32 @@ class RabbitMQClient(BaseClient):
 		exchange_name = urllib.parse.quote(exchange_name, safe='')
 		vhost = urllib.parse.quote(vhost, safe='')
 		return self.delete(f'/api/exchanges/{vhost}/{exchange_name}')
+
+	def get_bindings(self) -> list[dict]:
+		"""
+		Get the list of all bindings
+		:return:
+		"""
+		return self.get('/api/bindings')
+
+	def get_vhost_bindings(self, vhost: str) -> list[dict]:
+		"""
+		Get the list of all bindings for a vhost
+		:param vhost: the name of vhost
+		:return: list of dict
+		"""
+		return self.get(f'/api/bindings/{vhost}')
+
+	def get_vhost_binding(self, vhost, exchange, queue: str):
+		"""
+		:param vhost:
+		:param exchange:
+		:param queue:
+		:return:
+		"""
+		return self.get(f'/api/bindings/{vhost}/e/{exchange}/q/{queue}')
+
+	def create_vhost_binding(self, vhost: str, exchange: str, queue: str, binding: Binding):
+		return self.post(f'/api/bindings/{vhost}/e/{exchange}/q/{queue}', binding.model_dump())
+
+

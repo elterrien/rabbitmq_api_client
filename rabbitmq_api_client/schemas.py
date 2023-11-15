@@ -56,3 +56,7 @@ class Exchange(BaseModel):
     auto_delete: bool = False
     internal: bool = False
     arguments: dict = {}
+
+
+class Binding(BaseModel):
+    routing_key: str
